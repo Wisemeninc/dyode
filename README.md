@@ -1,4 +1,4 @@
-Updating to python3
+Working on an update to python3.
 
 # DYODE : Do Your Own Diode
 
