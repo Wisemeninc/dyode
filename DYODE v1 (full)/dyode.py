@@ -7,8 +7,8 @@ import string
 import random
 import shutil
 import threading
-import ConfigParser
-from ConfigParser import SafeConfigParser
+import configparser
+from configparser import SafeConfigParser
 import sys, time, subprocess, os
 import logging
 import hashlib
@@ -49,7 +49,7 @@ def file_reception_loop(params):
 # Launch UDPCast to receive a file
 def receive_file(filepath, portbase):
     log.debug(portbase)
-    command = 'udp-receiver --nosync --mcast-rdv-addr 10.0.1.1 --interface eth1 --portbase ' + str(portbase) + ' -f ' + '\'' + filepath + '\''
+    command = 'udp-receiver --nosync --mcast-rdv-addr 10.0.1.1 --interface enp3s0 --portbase ' + str(portbase) + ' -f ' + '\'' + filepath + '\''
     log.debug(command)
     #p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
     p = subprocess.Popen(shlex.split(command), shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -76,8 +76,8 @@ def wait_for_file(params):
         temp_file = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(12))
         receive_file(temp_file, params['port'])
         log.info('File ' + f + ' received')
-	log.debug(datetime.datetime.now())
-	hash_file(temp_file)
+        log.debug(datetime.datetime.now())
+        hash_file(temp_file)
         if hash_file(temp_file) != files[f]:
             log.error('Invalid checksum for file ' + f)
             os.remove(f)
@@ -85,8 +85,8 @@ def wait_for_file(params):
             continue
         else:
             log.info('Hashes match !')
-	    shutil.move(temp_file, params['out'] + '/' + filename)
-	    log.info('File ' + filename + ' available at ' + params['out'])
+            shutil.move(temp_file, params['out'] + '/' + filename)
+            log.info('File ' + filename + ' available at ' + params['out'])
     os.remove(manifest_filename)
 
 
@@ -99,7 +99,7 @@ def send_file(file, port_base, max_bitrate):
                  + str('{:0.0f}'.format(max_bitrate)) \
                  + 'm --mcast-rdv-addr 10.0.1.2 --mcast-data-addr 10.0.1.2 ' \
                  + '--portbase ' + str(port_base) + ' --autostart 1 ' \
-                 + '--interface eth0 -f ' + '\'' + str(file) + '\''
+                 + '--interface enp3s0 -f ' + '\'' + str(file) + '\''
     log.debug(command)
     p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
     (output, err) = p.communicate()
@@ -127,7 +127,7 @@ def parse_config():
     return params
 
 def write_manifest(files, manifest_filename):
-    config = ConfigParser.RawConfigParser()
+    config = configparser.RawConfigParser()
     config.add_section('Files')
     log.debug('Files...')
     log.debug(files)

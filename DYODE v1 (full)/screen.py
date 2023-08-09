@@ -9,7 +9,8 @@ import struct
 import pickle
 import math
 from socket import *
-from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+# from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+from http.server import BaseHTTPRequestHandler,HTTPServer
 import asyncore
 import pyinotify
 import dyode
@@ -32,15 +33,15 @@ def screen_file_copy(file, params):
     s = socket(AF_INET,SOCK_DGRAM)
 
     for i in range(1, nb_of_packets + 1):
-    	if (i < nb_of_packets):
-    		data = file_data[((i-1)*(buffer_size-4)):(i*(buffer_size - 4))]
-    		msg = struct.pack('>I', len(data)) + data
-    	elif (i == nb_of_packets):
-    		data = file_data[((i-1)*(buffer_size - 4)):file_length]
-    		msg = struct.pack('>I', len(data)) + data
-    	s.sendto(msg,addr)
-    	time.sleep(0.0002)
-    	i+= 1
+        if (i < nb_of_packets):
+          data = file_data[((i-1)*(buffer_size-4)):(i*(buffer_size - 4))]
+          msg = struct.pack('>I', len(data)) + data
+        elif (i == nb_of_packets):
+          data = file_data[((i-1)*(buffer_size - 4)):file_length]
+          msg = struct.pack('>I', len(data)) + data
+          s.sendto(msg,addr)
+          time.sleep(0.0002)
+          i+= 1
     s.sendto('', addr)
     s.close()
     f.close()
@@ -66,12 +67,12 @@ def get_screenshot(port):
 
     full_data = ''
     while True:
-    	data, addr = s.recvfrom(2048)
-    	if not data:
-    		break
-    	else:
-    		msg_length = struct.unpack('>I', data[:4])[0]
-    		full_data += data[4:(msg_length+4)]
+      data, addr = s.recvfrom(2048)
+      if not data:
+        break
+      else:
+        msg_length = struct.unpack('>I', data[:4])[0]
+        full_data += data[4:(msg_length+4)]
     s.close()
 
     return full_data

@@ -37,7 +37,7 @@ def launch_agents(module, properties):
 
 if __name__ == '__main__':
     with open('config.yaml', 'r') as config_file:
-        config = yaml.load(config_file)
+        config = yaml.load(config_file, Loader=yaml.FullLoader)
 
     # Log infos about the configuration file
     log.info('Loading config file')
@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
     # Iterate on modules
     modules = config.get('modules')
-    for module, properties in modules.iteritems():
+    for module, properties in modules.items():
         #print module
         log.debug('Parsing "' + module + '"')
         log.debug('Trying to launch a new process for module "' + str(module) +'"')

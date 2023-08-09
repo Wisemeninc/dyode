@@ -1,0 +1,49 @@
+config_name: "Dyode test"
+config_version : 1.0
+config_date: 2023-08-09
+
+dyode_in:
+  ip: 10.0.1.1
+  mac: 00:e0:4c:22:47:76
+dyode_out:
+  ip: 10.0.1.2
+  mac: 00:e0:4c:22:47:26
+
+modules:
+  "Fileshare 1":
+     type: folder
+     port: 9600
+     in: /home/toor/in
+     out: /home/toor/out
+  "Shareing 2":
+     type: folder
+     port: 9700
+     in: /home/toor/in2
+     out: /home/toor/out2
+  "Modbus PLC 1":
+     type: Modbus
+     port: 9400
+     ip: 192.168.1.150
+     port_out: 502
+     registers:
+       - 0-100
+       - 400-450
+     coils:
+       - 0-10
+       - 100-110
+  "Modbus PLC 2":
+    type: modbus
+    port: 9500
+    ip: 127.0.0.1
+    port_out: 503
+    registers:
+      - 0-10
+      - 400-402
+    coils:
+      - 0-10
+      - 100-110
+  "Screensharing":
+     type: screen
+     port: 9900
+     in: /home/toor/screen
+     out: /home/toor/screen

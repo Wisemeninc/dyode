@@ -10,41 +10,8 @@ dyode_out:
   mac: 00:e0:4c:22:47:26
 
 modules:
-  "Partage de fichier 1":
+  "Fileshare":
      type: folder
      port: 9600
      in: /home/toor/in
      out: /home/toor/out
-  "Partage 2":
-     type: folder
-     port: 9700
-     in: /home/toor/in2
-     out: /home/toor/out2
-  "Automate Modbus 1":
-     type: Modbus
-     port: 9400
-     ip: 192.168.1.150
-     port_out: 502
-     registers:
-       - 0-100
-       - 400-450
-     coils:
-       - 0-10
-       - 100-110
-  "Automate Modbus 2":
-    type: modbus
-    port: 9500
-    ip: 127.0.0.1
-    port_out: 503
-    registers:
-      - 0-10
-      - 400-402
-    coils:
-      - 0-10
-      - 100-110
-  "Partage d'ecran presta":
-     type: screen
-     port: 9900
-     in: /home/toor/screenz
-     out: /home/toor/screenz
-
