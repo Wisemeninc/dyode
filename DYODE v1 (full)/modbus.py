@@ -179,4 +179,4 @@ def modbus_master(module, properties):
     loop = LoopingCall(f=modbus_master_update, a=(module, properties, context))
     loop.start(time, now=False) # initially delay by time
     StartTcpServer(context=context, host='localhost', identity=identity, \
-                    address=("192.168.2.189", 5020))
+                    address=("192.168.2.189", 9400))
