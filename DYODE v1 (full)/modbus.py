@@ -116,7 +116,7 @@ def modbus_loop(module, properties):
 
 def get_modbus_data(port):
     s = socket(AF_INET,SOCK_DGRAM)
-    s.bind(('10.0.1.2',port))
+    s.bind(('10.0.1.2', 9400))
 
     full_data = ''
     i = 0
