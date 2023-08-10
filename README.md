@@ -1,3 +1,5 @@
+Working on an update to python3.
+
 # DYODE : Do Your Own Diode
 
 A DIY, low-cost data diode for ICS
