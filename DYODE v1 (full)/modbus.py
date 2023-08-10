@@ -117,7 +117,7 @@ def modbus_loop(module, properties):
 def get_modbus_data(port):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(('10.0.1.2', 9560))
-
+    log.info('Binding to UDP socket')
     full_data = ''
     i = 0
     while True:
