@@ -116,7 +116,7 @@ def modbus_loop(module, properties):
 
 def get_modbus_data(port):
     s = socket(AF_INET,SOCK_DGRAM)
-    s.bind(('10.0.1.2', 9400))
+    s.bind(('10.0.1.2', port))
 
     full_data = ''
     i = 0
@@ -179,4 +179,4 @@ def modbus_master(module, properties):
     loop = LoopingCall(f=modbus_master_update, a=(module, properties, context))
     loop.start(time, now=False) # initially delay by time
     StartTcpServer(context=context, host='localhost', identity=identity, \
-                    address=("192.168.2.189", 9400))
+                    address=("192.168.2.189", 5020))

@@ -12,11 +12,11 @@ dyode_out:
 modules:
   "Modbus PLC 1":
     type: modbus
-    port: 9400
+    port: 9560
     ip: 192.168.2.215
     port_out: 5020
     registers:
-      - 1-100
+      - 40001-40005
       #- 400-450
     coils:
       - 1-100
