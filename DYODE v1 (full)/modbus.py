@@ -34,6 +34,7 @@ logging.basicConfig()
 log = logging.getLogger()
 log.setLevel(logging.DEBUG)
 
+log.info("Starting Modbus Module")
 # Frequency at which to get modbus values
 WAIT_TIME = 1
 
