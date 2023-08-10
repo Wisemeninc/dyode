@@ -40,7 +40,7 @@ WAIT_TIME = 1
 def get_modbus(properties):
     try:
         print ("Performing an action which may throw an exception.")
-        client = ModbusClient(properties['ip'], port=502)
+        client = ModbusClient(properties['ip'], port=5020)
         client.connect()
         log.debug(properties['registers'])
         log.debug(properties['coils'])

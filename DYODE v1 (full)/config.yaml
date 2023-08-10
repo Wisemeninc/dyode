@@ -10,8 +10,14 @@ dyode_out:
   mac: 00:e0:4c:22:47:26
 
 modules:
-  "Fileshare":
-     type: folder
-     port: 9600
-     in: /home/toor/in
-     out: /home/toor/out
+  "Modbus PLC 1":
+    type: modbus
+    port: 9400
+    ip: 192.168.2.215
+    port_out: 5020
+    registers:
+      - 0-100
+      #- 400-450
+    coils:
+      - 0-10
+      #- 100-110
